@@ -1,0 +1,59 @@
+# Hatch configuration for matrix testing
+# See https://hatch.pypa.io/latest/config/environment/overview/
+
+[envs.default]
+dependencies = [
+    "pytest>=8.0.0",
+    "pytest-cov>=5.0.0",
+]
+
+[envs.default.scripts]
+test = "pytest {args:tests}"
+test-cov = "pytest --cov --cov-report=term-missing --cov-report=xml {args:tests}"
+
+# Matrix testing across Python versions
+[envs.test]
+template = "default"
+
+[[envs.test.matrix]]
+python = [{% for v in python_versions_matrix.split(',') %}"{{ v.strip() }}"{% if not loop.last %}, {% endif %}{% endfor %}]
+
+[envs.test.scripts]
+run = "pytest {args:tests}"
+run-cov = "pytest --cov --cov-report=term-missing {args:tests}"
+
+# Linting environment
+[envs.lint]
+detached = true
+dependencies = [
+    "ruff>=0.8.0",
+]
+
+[envs.lint.scripts]
+check = "ruff check ."
+format = "ruff format ."
+fix = "ruff check --fix ."
+all = ["check", "format"]
+
+# Type checking environment
+[envs.types]
+detached = true
+dependencies = []
+
+[envs.types.scripts]
+check = "uv run ty check"
+{%- if include_docs %}
+
+# Documentation environment
+[envs.docs]
+dependencies = [
+    "mkdocs>=1.6.0",
+    "mkdocs-material>=9.5.0",
+    "mkdocstrings[python]>=0.26.0",
+]
+
+[envs.docs.scripts]
+build = "mkdocs build"
+serve = "mkdocs serve"
+deploy = "mkdocs gh-deploy --force"
+{%- endif %}

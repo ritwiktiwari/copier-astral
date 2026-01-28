@@ -1,0 +1,160 @@
+# Copier configuration for Python projects with Astral toolchain
+# https://copier.readthedocs.io/
+
+_min_copier_version: "9.0.0"
+_subdirectory: template
+_jinja_extensions:
+  - copier_template_extensions.TemplateExtensionLoader
+  - extensions.py:SlugifyExtension
+  - extensions.py:GitExtension
+
+_skip_if_exists:
+  - CHANGELOG.md
+
+# =============================================================================
+# Project Basics
+# =============================================================================
+
+project_name:
+  type: str
+  help: "Project name (human-readable)"
+  placeholder: "My Awesome Project"
+  validator: >-
+    {% if not project_name %}
+    Project name is required.
+    {% endif %}
+
+project_description:
+  type: str
+  help: "Short project description"
+  placeholder: "A Python package that does amazing things"
+  default: "A Python package"
+
+project_slug:
+  type: str
+  help: "Python package name (used for imports)"
+  default: "{{ project_name | slugify | replace('-', '_') }}"
+  validator: >-
+    {% if not project_slug | regex_search('^[a-z][a-z0-9_]*$') %}
+    Package name must start with a letter and contain only lowercase letters, numbers, and underscores.
+    {% endif %}
+
+# =============================================================================
+# Author Information
+# =============================================================================
+
+author_name:
+  type: str
+  help: "Author's full name"
+  default: "{{ 'git config user.name' | git_config }}"
+  placeholder: "John Doe"
+
+author_email:
+  type: str
+  help: "Author's email address"
+  default: "{{ 'git config user.email' | git_config }}"
+  placeholder: "john@example.com"
+
+github_username:
+  type: str
+  help: "GitHub username or organization"
+  placeholder: "johndoe"
+
+# =============================================================================
+# Repository
+# =============================================================================
+
+repository_name:
+  type: str
+  help: "Repository name on GitHub"
+  default: "{{ project_name | slugify }}"
+
+repository_url:
+  type: str
+  help: "Full repository URL"
+  default: "https://github.com/{{ github_username }}/{{ repository_name }}"
+
+# =============================================================================
+# Python Version
+# =============================================================================
+
+python_version:
+  type: str
+  help: "Minimum Python version"
+  choices:
+    - "3.10"
+    - "3.11"
+    - "3.12"
+    - "3.13"
+  default: "3.12"
+
+python_versions_matrix:
+  type: str
+  help: "Python versions for CI matrix testing (comma-separated)"
+  default: "3.10,3.11,3.12,3.13"
+
+# =============================================================================
+# Features
+# =============================================================================
+
+include_cli:
+  type: bool
+  help: "Include CLI with Typer?"
+  default: true
+
+include_github_actions:
+  type: bool
+  help: "Include GitHub Actions CI/CD?"
+  default: true
+
+include_docker:
+  type: bool
+  help: "Include Dockerfile for containerization?"
+  default: true
+
+include_docs:
+  type: bool
+  help: "Include MkDocs documentation?"
+  default: true
+
+include_precommit:
+  type: bool
+  help: "Include pre-commit hooks?"
+  default: true
+
+include_codecov:
+  type: bool
+  help: "Include Codecov integration?"
+  default: true
+  when: "{{ include_github_actions }}"
+
+include_pypi_publish:
+  type: bool
+  help: "Include automatic PyPI publishing?"
+  default: true
+  when: "{{ include_github_actions }}"
+
+# =============================================================================
+# License
+# =============================================================================
+
+license:
+  type: str
+  help: "Project license"
+  choices:
+    - MIT
+    - Apache-2.0
+    - GPL-3.0
+    - BSD-3-Clause
+    - ISC
+    - Proprietary
+  default: MIT
+
+# =============================================================================
+# Computed/Internal Variables
+# =============================================================================
+
+_current_year:
+  type: str
+  default: "{{ '%Y' | strftime }}"
+  when: false

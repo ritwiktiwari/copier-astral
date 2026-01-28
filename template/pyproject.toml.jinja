@@ -1,0 +1,170 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "{{ project_slug }}"
+version = "0.1.0"
+description = "{{ project_description }}"
+readme = "README.md"
+license = "{{ license }}"
+requires-python = ">={{ python_version }}"
+authors = [
+    { name = "{{ author_name }}", email = "{{ author_email }}" },
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+{%- if license == "MIT" %}
+    "License :: OSI Approved :: MIT License",
+{%- elif license == "Apache-2.0" %}
+    "License :: OSI Approved :: Apache Software License",
+{%- elif license == "GPL-3.0" %}
+    "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+{%- elif license == "BSD-3-Clause" %}
+    "License :: OSI Approved :: BSD License",
+{%- elif license == "ISC" %}
+    "License :: OSI Approved :: ISC License (ISCL)",
+{%- endif %}
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+{%- for version in python_versions_matrix.split(',') %}
+    "Programming Language :: Python :: {{ version.strip() }}",
+{%- endfor %}
+    "Typing :: Typed",
+]
+keywords = []
+dependencies = [
+{%- if include_cli %}
+    "typer>=0.12.0",
+{%- endif %}
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.0.0",
+    "pytest-cov>=5.0.0",
+    "ruff>=0.8.0",
+{%- if include_precommit %}
+    "pre-commit>=3.5.0",
+{%- endif %}
+]
+{%- if include_docs %}
+docs = [
+    "mkdocs>=1.6.0",
+    "mkdocs-material>=9.5.0",
+    "mkdocstrings[python]>=0.26.0",
+]
+{%- endif %}
+
+[project.urls]
+Homepage = "{{ repository_url }}"
+Documentation = "https://{{ github_username }}.github.io/{{ repository_name }}"
+Repository = "{{ repository_url }}"
+Issues = "{{ repository_url }}/issues"
+Changelog = "{{ repository_url }}/blob/main/CHANGELOG.md"
+
+{%- if include_cli %}
+
+[project.scripts]
+{{ project_slug }} = "{{ project_slug }}.cli:app"
+{%- endif %}
+
+# =============================================================================
+# Hatch
+# =============================================================================
+
+[tool.hatch.build.targets.sdist]
+include = [
+    "/src",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/{{ project_slug }}"]
+
+# =============================================================================
+# Ruff
+# =============================================================================
+
+[tool.ruff]
+target-version = "py{{ python_version | replace('.', '') }}"
+line-length = 88
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = [
+    "E",      # pycodestyle errors
+    "W",      # pycodestyle warnings
+    "F",      # Pyflakes
+    "I",      # isort
+    "B",      # flake8-bugbear
+    "C4",     # flake8-comprehensions
+    "UP",     # pyupgrade
+    "ARG",    # flake8-unused-arguments
+    "SIM",    # flake8-simplify
+    "TCH",    # flake8-type-checking
+    "PTH",    # flake8-use-pathlib
+    "ERA",    # eradicate
+    "RUF",    # Ruff-specific rules
+]
+ignore = [
+    "E501",   # line too long (handled by formatter)
+]
+
+[tool.ruff.lint.isort]
+known-first-party = ["{{ project_slug }}"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**/*.py" = ["ARG001"]
+
+# =============================================================================
+# ty (Astral type checker)
+# =============================================================================
+
+[tool.ty]
+src = ["src"]
+
+# =============================================================================
+# Pytest
+# =============================================================================
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+addopts = [
+    "-ra",
+    "-q",
+    "--strict-markers",
+    "--strict-config",
+]
+markers = [
+    "slow: marks tests as slow (deselect with '-m \"not slow\"')",
+]
+
+# =============================================================================
+# Coverage
+# =============================================================================
+
+[tool.coverage.run]
+source = ["src/{{ project_slug }}"]
+branch = true
+parallel = true
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if __name__ == .__main__.:",
+    "if TYPE_CHECKING:",
+    "@abstractmethod",
+]
+show_missing = true
+
+# =============================================================================
+# git-cliff (Changelog generation)
+# =============================================================================
+
+[tool.git-cliff]
+config = "cliff.toml"

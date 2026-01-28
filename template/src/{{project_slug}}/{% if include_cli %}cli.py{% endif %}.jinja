@@ -1,0 +1,46 @@
+"""Command-line interface for {{ project_slug }}."""
+
+from typing import Optional
+
+import typer
+
+from {{ project_slug }} import __version__
+
+app = typer.Typer(
+    name="{{ project_slug }}",
+    help="{{ project_description }}",
+    add_completion=False,
+)
+
+
+def version_callback(value: bool) -> None:
+    """Print version and exit."""
+    if value:
+        typer.echo(f"{{ project_slug }} version: {__version__}")
+        raise typer.Exit()
+
+
+@app.callback()
+def main(
+    version: Optional[bool] = typer.Option(
+        None,
+        "--version",
+        "-v",
+        help="Show version and exit.",
+        callback=version_callback,
+        is_eager=True,
+    ),
+) -> None:
+    """{{ project_description }}."""
+
+
+@app.command()
+def hello(
+    name: str = typer.Argument("World", help="Name to greet"),
+) -> None:
+    """Say hello to someone."""
+    typer.echo(f"Hello, {name}!")
+
+
+if __name__ == "__main__":
+    app()

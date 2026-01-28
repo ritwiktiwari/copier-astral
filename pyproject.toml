@@ -1,0 +1,37 @@
+[project]
+name = "copier-astral"
+version = "0.1.0"
+description = "A Copier template for Python projects using Astral's toolchain"
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT"
+authors = [
+    { name = "Ritwik" }
+]
+dependencies = []
+
+[dependency-groups]
+dev = [
+    "copier>=9.11.3",
+    "copier-template-extensions>=0.3.3",
+    "pytest>=9.0.2",
+    "ruff>=0.14.14",
+    "ty>=0.0.14"
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["."]
+
+[tool.ruff]
+target-version = "py310"
+line-length = 88
+
+[tool.ruff.lint]
+select = ["E", "W", "F", "I", "B", "UP"]
+
+[tool.ty.src]
+include = ["**/*.py"]

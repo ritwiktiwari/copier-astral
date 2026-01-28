@@ -1,0 +1,112 @@
+# {{ project_name }}
+
+[![CI]({{ repository_url }}/actions/workflows/ci.yml/badge.svg)]({{ repository_url }}/actions/workflows/ci.yml)
+{%- if include_pypi_publish %}
+[![PyPI version](https://badge.fury.io/py/{{ project_slug }}.svg)](https://badge.fury.io/py/{{ project_slug }})
+{%- endif %}
+{%- if include_codecov %}
+[![codecov](https://codecov.io/gh/{{ github_username }}/{{ repository_name }}/branch/main/graph/badge.svg)](https://codecov.io/gh/{{ github_username }}/{{ repository_name }})
+{%- endif %}
+[![Python {{ python_version }}+](https://img.shields.io/badge/python-{{ python_version }}+-blue.svg)](https://www.python.org/downloads/)
+[![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
+[![License: {{ license }}](https://img.shields.io/badge/License-{{ license | replace('-', '--') }}-yellow.svg)]({{ repository_url }}/blob/main/LICENSE)
+
+{{ project_description }}
+
+## Features
+
+- Fast and modern Python toolchain using Astral's tools (uv, ruff, ty)
+- Type-safe with full type annotations
+{%- if include_cli %}
+- Command-line interface built with Typer
+{%- endif %}
+{%- if include_docs %}
+- Comprehensive documentation with MkDocs
+{%- endif %}
+
+## Installation
+
+```bash
+pip install {{ project_slug }}
+```
+
+Or using uv (recommended):
+
+```bash
+uv add {{ project_slug }}
+```
+
+## Quick Start
+
+```python
+import {{ project_slug }}
+
+print({{ project_slug }}.__version__)
+```
+{%- if include_cli %}
+
+### CLI Usage
+
+```bash
+# Show version
+{{ project_slug }} --version
+
+# Say hello
+{{ project_slug }} hello World
+```
+{%- endif %}
+
+## Development
+
+### Prerequisites
+
+- Python {{ python_version }}+
+- [uv](https://docs.astral.sh/uv/) for package management
+
+### Setup
+
+```bash
+git clone {{ repository_url }}.git
+cd {{ repository_name }}
+uv sync --group dev
+```
+
+### Running Tests
+
+```bash
+uv run pytest
+```
+
+### Code Quality
+
+```bash
+# Lint
+uv run ruff check .
+
+# Format
+uv run ruff format .
+
+# Type check
+uv run ty check
+```
+{%- if include_precommit %}
+
+### Pre-commit
+
+```bash
+pre-commit install
+pre-commit run --all-files
+```
+{%- endif %}
+{%- if include_docs %}
+
+### Documentation
+
+```bash
+uv run mkdocs serve
+```
+{%- endif %}
+
+## License
+
+This project is licensed under the {{ license }} License - see the [LICENSE](LICENSE) file for details.

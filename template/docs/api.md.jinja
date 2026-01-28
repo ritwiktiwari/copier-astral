@@ -1,0 +1,16 @@
+# API Reference
+
+::: {{ project_slug }}
+    options:
+      show_root_heading: true
+      show_source: true
+      members_order: source
+{%- if include_cli %}
+
+## CLI Module
+
+::: {{ project_slug }}.cli
+    options:
+      show_root_heading: true
+      show_source: true
+{%- endif %}

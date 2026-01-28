@@ -1,0 +1,75 @@
+"""Custom Jinja2 extensions for the Copier template."""
+
+import re
+import subprocess
+import unicodedata
+
+from jinja2 import Environment
+from jinja2.ext import Extension
+
+
+def slugify(value: str) -> str:
+    """Convert a string to a slug suitable for use as a Python package name.
+
+    Args:
+        value: The string to slugify.
+
+    Returns:
+        A lowercase string with spaces and special characters replaced by hyphens.
+    """
+    # Normalize unicode characters
+    value = unicodedata.normalize("NFKD", value)
+    value = value.encode("ascii", "ignore").decode("ascii")
+
+    # Convert to lowercase and replace spaces/special chars with hyphens
+    value = re.sub(r"[^\w\s-]", "", value.lower())
+    value = re.sub(r"[-\s]+", "-", value).strip("-")
+
+    return value
+
+
+def git_config(key: str) -> str:
+    """Get a value from git config.
+
+    Args:
+        key: The git config command to run (e.g., 'git config user.name').
+
+    Returns:
+        The git config value or empty string if not found.
+    """
+    try:
+        result = subprocess.run(
+            key.split(),
+            capture_output=True,
+            text=True,
+            timeout=5,
+        )
+        return result.stdout.strip()
+    except (subprocess.SubprocessError, FileNotFoundError):
+        return ""
+
+
+class SlugifyExtension(Extension):
+    """Jinja2 extension that provides the slugify filter."""
+
+    def __init__(self, environment: Environment) -> None:
+        """Initialize the extension.
+
+        Args:
+            environment: The Jinja2 environment.
+        """
+        super().__init__(environment)
+        environment.filters["slugify"] = slugify
+
+
+class GitExtension(Extension):
+    """Jinja2 extension that provides git-related filters."""
+
+    def __init__(self, environment: Environment) -> None:
+        """Initialize the extension.
+
+        Args:
+            environment: The Jinja2 environment.
+        """
+        super().__init__(environment)
+        environment.filters["git_config"] = git_config
