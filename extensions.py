@@ -50,6 +50,29 @@ def git_config(key: str) -> str:
         return ""
 
 
+def github_username(_: str = "") -> str:
+    """Get the GitHub username from gh CLI.
+
+    Args:
+        _: Ignored input (allows use as filter).
+
+    Returns:
+        The GitHub username or empty string if not found.
+    """
+    try:
+        result = subprocess.run(
+            ["gh", "api", "user", "--jq", ".login"],
+            capture_output=True,
+            text=True,
+            timeout=10,
+        )
+        if result.returncode == 0:
+            return result.stdout.strip()
+    except (subprocess.SubprocessError, FileNotFoundError):
+        pass
+    return ""
+
+
 class SlugifyExtension(Extension):
     """Jinja2 extension that provides the slugify filter."""
 
@@ -74,6 +97,7 @@ class GitExtension(Extension):
         """
         super().__init__(environment)
         environment.filters["git_config"] = git_config
+        environment.filters["github_username"] = github_username
 
 
 def current_year(_: str = "") -> str:

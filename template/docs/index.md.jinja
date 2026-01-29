@@ -50,7 +50,7 @@ print({{ project_slug }}.__version__)
 Clone the repository and install dependencies:
 
 ```bash
-git clone {{ repository_url }}.git
+git clone https://github.com/{{ github_username }}/{{ repository_name }}.git
 cd {{ repository_name }}
 uv sync --group dev
 ```
@@ -86,4 +86,4 @@ pre-commit install
 
 ## License
 
-This project is licensed under the {{ license }} License - see the [LICENSE]({{ repository_url }}/blob/main/LICENSE) file for details.
+This project is licensed under the {{ license }} License - see the [LICENSE](https://github.com/{{ github_username }}/{{ repository_name }}/blob/main/LICENSE) file for details.

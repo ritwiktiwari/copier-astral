@@ -58,11 +58,11 @@ docs = [
 {%- endif %}
 
 [project.urls]
-Homepage = "{{ repository_url }}"
+Homepage = "https://github.com/{{ github_username }}/{{ repository_name }}"
 Documentation = "https://{{ github_username }}.github.io/{{ repository_name }}"
-Repository = "{{ repository_url }}"
-Issues = "{{ repository_url }}/issues"
-Changelog = "{{ repository_url }}/blob/main/CHANGELOG.md"
+Repository = "https://github.com/{{ github_username }}/{{ repository_name }}"
+Issues = "https://github.com/{{ github_username }}/{{ repository_name }}/issues"
+Changelog = "https://github.com/{{ github_username }}/{{ repository_name }}/blob/main/CHANGELOG.md"
 
 {%- if include_cli %}
 

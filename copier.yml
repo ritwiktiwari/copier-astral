@@ -59,7 +59,12 @@ author_email:
 github_username:
   type: str
   help: "GitHub username or organization"
+  default: "{{ '' | github_username }}"
   placeholder: "johndoe"
+  validator: >-
+    {% if not github_username %}
+    GitHub username is required for generating repository URLs.
+    {% endif %}
 
 # =============================================================================
 # Repository
@@ -69,12 +74,6 @@ repository_name:
   type: str
   help: "Repository name on GitHub"
   default: "{{ project_name | slugify }}"
-
-repository_url:
-  type: str
-  help: "Full repository URL"
-  default: "https://github.com/{{ github_username }}/{{ repository_name }}"
-  when: false
 
 # =============================================================================
 # Python Version

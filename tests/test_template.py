@@ -250,3 +250,52 @@ class TestPythonVersions:
 
         pyproject = project / "pyproject.toml"
         assert file_contains_text(pyproject, f'requires-python = ">={version}"')
+
+
+class TestGitHubURLs:
+    """Tests for GitHub URL generation."""
+
+    def test_github_username_in_pyproject_urls(
+        self, tmp_path: Path, default_answers: dict
+    ):
+        """Test that github_username appears in pyproject.toml URLs."""
+        project = run_copier(tmp_path, default_answers)
+        pyproject = project / "pyproject.toml"
+
+        # Check URLs contain the github_username
+        assert file_contains_text(
+            pyproject, "https://github.com/testuser/test-project"
+        )
+        assert file_contains_text(
+            pyproject, "https://testuser.github.io/test-project"
+        )
+
+    def test_github_username_in_readme(self, tmp_path: Path, default_answers: dict):
+        """Test that github_username appears in README URLs."""
+        project = run_copier(tmp_path, default_answers)
+        readme = project / "README.md"
+
+        assert file_contains_text(
+            readme, "https://github.com/testuser/test-project"
+        )
+
+    def test_github_username_in_mkdocs(self, tmp_path: Path, default_answers: dict):
+        """Test that github_username appears in mkdocs.yml URLs."""
+        project = run_copier(tmp_path, default_answers)
+        mkdocs = project / "mkdocs.yml"
+
+        assert file_contains_text(
+            mkdocs, "https://github.com/testuser/test-project"
+        )
+        assert file_contains_text(mkdocs, "testuser/test-project")
+
+    def test_github_username_in_docs_index(
+        self, tmp_path: Path, default_answers: dict
+    ):
+        """Test that github_username appears in docs/index.md URLs."""
+        project = run_copier(tmp_path, default_answers)
+        docs_index = project / "docs" / "index.md"
+
+        assert file_contains_text(
+            docs_index, "https://github.com/testuser/test-project"
+        )
