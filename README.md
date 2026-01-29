@@ -97,7 +97,7 @@ my-project/
 
 ```bash
 cd my-project
-uv sync --group dev
+uv sync --all-groups
 ```
 
 ### Development Commands
