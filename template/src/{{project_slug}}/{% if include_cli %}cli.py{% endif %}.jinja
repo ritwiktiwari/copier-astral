@@ -1,7 +1,5 @@
 """Command-line interface for {{ project_slug }}."""
 
-from typing import Optional
-
 import typer
 
 from {{ project_slug }} import __version__
@@ -22,7 +20,7 @@ def version_callback(value: bool) -> None:
 
 @app.callback()
 def main(
-    version: Optional[bool] = typer.Option(
+    version: bool | None = typer.Option(
         None,
         "--version",
         "-v",

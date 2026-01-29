@@ -1,9 +1,9 @@
 """Tests for {{ project_slug }}."""
 
-from {{ project_slug }} import __version__
-{%- if include_cli %}
 from typer.testing import CliRunner
 
+from {{ project_slug }} import __version__
+{%- if include_cli %}
 from {{ project_slug }}.cli import app
 
 runner = CliRunner()

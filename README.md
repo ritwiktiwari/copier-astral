@@ -97,7 +97,7 @@ my-project/
 
 ```bash
 cd my-project
-uv sync --group dev
+uv sync --all-groups
 ```
 
 ### Development Commands
@@ -172,6 +172,7 @@ uv publish
   - Creates GitHub release with changelog
 
 - **Docs** (`docs.yml`): Deploys to GitHub Pages
+  > **Important:** If you enabled docs during setup, you must manually enable GitHub Pages in your repository. Go to **Settings → Pages → Source** and select **GitHub Actions**. Without this, the docs workflow will fail.
 
 ## Updating Projects
 
