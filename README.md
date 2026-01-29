@@ -1,4 +1,6 @@
-# Copier-Astral
+![Copier-Astral](static/copier-astral.png)
+
+--- 
 
 My opinionated [Copier](https://copier.readthedocs.io/) template for bootstrapping Python projects. Batteries included: linting, testing, CI/CD, docs, and containerization — all pre-configured and ready to go.
 
