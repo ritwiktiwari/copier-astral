@@ -27,14 +27,16 @@ Built for my own workflow, but you're welcome to use it!
 ### Generate a Project
 
 ```bash
-copier copy gh:YOUR_USERNAME/copier-astral my-project
+copier copy --trust gh:YOUR_USERNAME/copier-astral my-project
 ```
 
 Or from a local clone:
 
 ```bash
-copier copy /path/to/copier-astral my-project
+copier copy --trust /path/to/copier-astral my-project
 ```
+
+> **Note:** The `--trust` flag is required because this template uses custom Jinja2 extensions for features like auto-detecting git user info and generating slugified package names. These extensions are safe to use but Copier warns about them by default.
 
 ### Interactive Prompts
 
@@ -177,7 +179,7 @@ Copier supports updating projects to newer template versions:
 
 ```bash
 cd my-project
-copier update
+copier update --trust
 ```
 
 ## Configuration
