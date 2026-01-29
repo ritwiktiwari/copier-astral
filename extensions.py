@@ -3,6 +3,7 @@
 import re
 import subprocess
 import unicodedata
+from datetime import datetime
 
 from jinja2 import Environment
 from jinja2.ext import Extension
@@ -73,3 +74,29 @@ class GitExtension(Extension):
         """
         super().__init__(environment)
         environment.filters["git_config"] = git_config
+
+
+def current_year(_: str = "") -> str:
+    """Return the current year.
+
+    Args:
+        _: Ignored input (allows use as filter).
+
+    Returns:
+        The current year as a string.
+    """
+    return str(datetime.now().year)
+
+
+class CurrentYearExtension(Extension):
+    """Jinja2 extension that provides the current year."""
+
+    def __init__(self, environment: Environment) -> None:
+        """Initialize the extension.
+
+        Args:
+            environment: The Jinja2 environment.
+        """
+        super().__init__(environment)
+        environment.filters["current_year"] = current_year
+        environment.globals["current_year"] = datetime.now().year

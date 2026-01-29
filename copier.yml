@@ -7,6 +7,7 @@ _jinja_extensions:
   - copier_template_extensions.TemplateExtensionLoader
   - extensions.py:SlugifyExtension
   - extensions.py:GitExtension
+  - extensions.py:CurrentYearExtension
 
 _skip_if_exists:
   - CHANGELOG.md
@@ -73,6 +74,7 @@ repository_url:
   type: str
   help: "Full repository URL"
   default: "https://github.com/{{ github_username }}/{{ repository_name }}"
+  when: false
 
 # =============================================================================
 # Python Version
@@ -154,7 +156,3 @@ license:
 # Computed/Internal Variables
 # =============================================================================
 
-_current_year:
-  type: str
-  default: "{{ '%Y' | strftime }}"
-  when: false

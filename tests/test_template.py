@@ -222,7 +222,11 @@ class TestLicenses:
         ],
     )
     def test_license_content(
-        self, tmp_path: Path, default_answers: dict, license_type: str, expected_text: str
+        self,
+        tmp_path: Path,
+        default_answers: dict,
+        license_type: str,
+        expected_text: str,
     ):
         """Test that correct license is generated."""
         answers = {**default_answers, "license": license_type}
