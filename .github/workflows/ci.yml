@@ -7,20 +7,13 @@ on:
     branches: [main]
 
 jobs:
-  lint:
+  verify:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: astral-sh/setup-uv@v5
-      - run: make lint
-      - run: make format-check
-
-  type-check:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: astral-sh/setup-uv@v5
-      - run: make type-check
+      - run: make install
+      - run: make verify
 
   test:
     runs-on: ubuntu-latest
