@@ -78,8 +78,8 @@ my-project/
 │       ├── ci.yml
 │       ├── release.yml
 │       └── docs.yml
+├── Makefile                 # Development commands
 ├── pyproject.toml           # Single source of truth
-├── hatch.toml               # Matrix testing config
 ├── mkdocs.yml               # If docs enabled
 ├── cliff.toml               # Changelog config
 ├── .pre-commit-config.yaml  # If pre-commit enabled
@@ -97,42 +97,38 @@ my-project/
 
 ```bash
 cd my-project
-uv sync --all-groups
+make install
 ```
 
 ### Development Commands
 
 ```bash
+# Run all checks (lint, format, type-check)
+make verify
+
+# Auto-fix lint and format issues
+make fix
+
 # Run tests
-uv run pytest
+make test
 
 # Run tests with coverage
-uv run pytest --cov
+make test-cov
 
-# Lint code
-uv run ruff check .
+# Run tests across all Python versions
+make test-matrix
 
-# Format code
-uv run ruff format .
-
-# Type check
-uv run ty check
+# Run tests with coverage across all versions
+make test-matrix-cov
 
 # Build documentation
-uv run mkdocs serve
+make docs
+
+# Serve documentation locally
+make docs-serve
 
 # Install pre-commit hooks
 pre-commit install
-```
-
-### Matrix Testing with Hatch
-
-```bash
-# Run tests across all Python versions
-hatch run test:run
-
-# Run tests with coverage across all versions
-hatch run test:run-cov
 ```
 
 ### CLI (if enabled)

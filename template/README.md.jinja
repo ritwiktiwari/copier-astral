@@ -68,26 +68,29 @@ print({{ project_slug }}.__version__)
 ```bash
 git clone https://github.com/{{ github_username }}/{{ repository_name }}.git
 cd {{ repository_name }}
-uv sync --group dev
+make install
 ```
 
 ### Running Tests
 
 ```bash
-uv run pytest
+make test
+
+# With coverage
+make test-cov
+
+# Across all Python versions
+make test-matrix
 ```
 
 ### Code Quality
 
 ```bash
-# Lint
-uv run ruff check .
+# Run all checks (lint, format, type-check)
+make verify
 
-# Format
-uv run ruff format .
-
-# Type check
-uv run ty check
+# Auto-fix lint and format issues
+make fix
 ```
 {%- if include_precommit %}
 
@@ -103,7 +106,7 @@ pre-commit run --all-files
 ### Documentation
 
 ```bash
-uv run mkdocs serve
+make docs-serve
 ```
 {%- endif %}
 
