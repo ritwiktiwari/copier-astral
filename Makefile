@@ -1,4 +1,4 @@
-.PHONY: verify fix lint format type-check install
+.PHONY: verify fix lint format type-check install test
 
 # Verify - check everything without making changes
 verify: lint format-check type-check
@@ -24,3 +24,7 @@ type-check:
 # Install dependencies
 install:
 	uv sync --group dev
+
+# Run tests
+test:
+	uv run pytest tests/ -v
