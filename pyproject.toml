@@ -6,7 +6,7 @@ readme = "README.md"
 requires-python = ">=3.10"
 license = "MIT"
 authors = [
-    { name = "Ritwik" }
+    { name = "Ritwik Tiwari", email = "ritwiktiwari24@gmail.com" }
 ]
 dependencies = []
 
@@ -17,6 +17,10 @@ dev = [
     "pytest>=9.0.2",
     "ruff>=0.14.14",
     "ty>=0.0.14"
+]
+docs = [
+    "mkdocs>=1.6.0",
+    "mkdocs-material>=9.7.0",
 ]
 
 [build-system]
