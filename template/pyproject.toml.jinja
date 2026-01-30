@@ -46,6 +46,7 @@ dev = [
     "pytest-cov>=7.0.0",
     "ruff>=0.14.14",
     "ty>=0.0.14",
+    "hatch>=1.16.3",
 {%- if include_precommit %}
     "pre-commit>=4.5.1",
 {%- endif %}
@@ -82,6 +83,12 @@ include = [
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/{{ project_slug }}"]
+
+# Matrix testing across Python versions
+[tool.hatch.envs.test]
+
+[[tool.hatch.envs.test.matrix]]
+python = [{% for v in python_versions_matrix.split(',') %}"{{ v.strip() }}"{% if not loop.last %}, {% endif %}{% endfor %}]
 
 # =============================================================================
 # Ruff

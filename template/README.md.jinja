@@ -7,8 +7,10 @@
 {%- if include_codecov %}
 [![codecov](https://codecov.io/gh/{{ github_username }}/{{ repository_name }}/branch/main/graph/badge.svg)](https://codecov.io/gh/{{ github_username }}/{{ repository_name }})
 {%- endif %}
-[![Python {{ python_version }}+](https://img.shields.io/badge/python-{{ python_version }}+-blue.svg)](https://www.python.org/downloads/)
+[![Python {{ python_versions_matrix | replace(',', ' | ') | trim }}](https://img.shields.io/badge/python-{{ python_versions_matrix | replace(',', ' | ') | trim | replace(' ', '%20') }}-blue.svg)](https://www.python.org/downloads/)
+[![uv](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/uv/main/assets/badge/v0.json)](https://github.com/astral-sh/uv)
 [![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
+[![ty](https://img.shields.io/badge/type--checked-ty-blue?labelColor=orange)](https://github.com/astral-sh/ty)
 [![License: {{ license }}](https://img.shields.io/badge/License-{{ license | replace('-', '--') }}-yellow.svg)](https://github.com/{{ github_username }}/{{ repository_name }}/blob/main/LICENSE)
 
 {{ project_description }}
@@ -68,26 +70,29 @@ print({{ project_slug }}.__version__)
 ```bash
 git clone https://github.com/{{ github_username }}/{{ repository_name }}.git
 cd {{ repository_name }}
-uv sync --group dev
+make install
 ```
 
 ### Running Tests
 
 ```bash
-uv run pytest
+make test
+
+# With coverage
+make test-cov
+
+# Across all Python versions
+make test-matrix
 ```
 
 ### Code Quality
 
 ```bash
-# Lint
-uv run ruff check .
+# Run all checks (lint, format, type-check)
+make verify
 
-# Format
-uv run ruff format .
-
-# Type check
-uv run ty check
+# Auto-fix lint and format issues
+make fix
 ```
 {%- if include_precommit %}
 
@@ -103,7 +108,7 @@ pre-commit run --all-files
 ### Documentation
 
 ```bash
-uv run mkdocs serve
+make docs-serve
 ```
 {%- endif %}
 
