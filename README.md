@@ -29,7 +29,7 @@ Built for my own workflow, but you're welcome to use it!
 ### Generate a Project
 
 ```bash
-copier copy --trust gh:YOUR_USERNAME/copier-astral my-project
+copier copy --trust gh:ritwiktiwari/copier-astral my-project
 ```
 
 Or from a local clone:
