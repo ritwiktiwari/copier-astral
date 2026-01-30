@@ -42,7 +42,7 @@ copier copy --trust /path/to/copier-astral my-project
 
 ## Documentation
 
-For the full user guide, template options, and contributing instructions, see the [documentation site](https://YOUR_USERNAME.github.io/copier-astral/).
+For the full user guide, template options, and contributing instructions, see the [documentation site](https://ritwiktiwari.github.io/copier-astral/).
 
 ## License
 
