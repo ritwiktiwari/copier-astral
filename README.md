@@ -1,6 +1,6 @@
 ![Copier-Astral](static/copier-astral.png)
 
---- 
+---
 
 My opinionated [Copier](https://copier.readthedocs.io/) template for bootstrapping Python projects. Batteries included: linting, testing, CI/CD, docs, and containerization — all pre-configured and ready to go.
 
@@ -40,23 +40,77 @@ copier copy --trust /path/to/copier-astral my-project
 
 > **Note:** The `--trust` flag is required because this template uses custom Jinja2 extensions for features like auto-detecting git user info and generating slugified package names. These extensions are safe to use but Copier warns about them by default.
 
-### Interactive Prompts
+## Getting Started with Your Generated Project
 
-The template will ask you about:
+### 1. Initialize the repository and install dependencies
 
-- **Project name** and description
-- **Author information** (auto-detected from git config)
-- **GitHub username** for repository URLs
-- **Python version** (3.10, 3.11, 3.12, or 3.13)
-- **Optional features**:
-  - CLI with Typer
-  - GitHub Actions CI/CD
-  - Docker support
-  - MkDocs documentation
-  - Pre-commit hooks
-  - Codecov integration
-  - PyPI publishing
-- **License** (MIT, Apache-2.0, GPL-3.0, BSD-3-Clause, ISC, Proprietary)
+```bash
+cd my-project
+git init -b main
+make install
+```
+
+### 2. Run the pre-commit hooks
+
+If you enabled pre-commit, install the hooks and run them to resolve any initial formatting issues:
+
+```bash
+pre-commit install
+uv run pre-commit run -a
+```
+
+### 3. Verify everything works
+
+```bash
+make verify
+make test
+```
+
+### 4. Create your GitHub repository and push
+
+```bash
+git add .
+git commit -m "init: generate project from copier-astral"
+git remote add origin git@github.com:YOUR_USERNAME/my-project.git
+git push -u origin main
+```
+
+> **Important:** If you enabled docs during setup, you must manually enable GitHub Pages in your repository. Go to **Settings → Pages → Source** and select **GitHub Actions**. Without this, the docs workflow will fail.
+
+### 5. Set up external services (optional)
+
+- **Codecov**: Add your `CODECOV_TOKEN` as a [repository secret](https://docs.github.com/en/actions/security-for-github-actions/security-guides/using-secrets-in-github-actions#creating-secrets-for-a-repository)
+- **PyPI**: Add your `PYPI_TOKEN` as a repository secret. See the [PyPI docs](https://pypi.org/help/#apitoken) for creating a token
+
+## Development Commands
+
+All commands are available via `make`:
+
+| Command | Description |
+|---------|-------------|
+| `make install` | Install all dependencies |
+| `make verify` | Run all checks (lint, format, type-check) |
+| `make fix` | Auto-fix lint and format issues |
+| `make test` | Run tests |
+| `make test-cov` | Run tests with coverage |
+| `make test-matrix` | Run tests across all Python versions |
+| `make test-matrix-cov` | Run tests with coverage across all versions |
+| `make docs` | Build documentation |
+| `make docs-serve` | Serve documentation locally |
+
+## Releasing a New Version
+
+1. Create a new version tag:
+
+   ```bash
+   git tag v0.1.0
+   git push --tags
+   ```
+
+2. The `release.yml` workflow will automatically:
+   - Build the distribution
+   - Publish to PyPI (if configured)
+   - Create a GitHub release with changelog
 
 ## Generated Project Structure
 
@@ -93,86 +147,7 @@ my-project/
 └── .gitignore
 ```
 
-## Using the Generated Project
-
-### Initial Setup
-
-```bash
-cd my-project
-make install
-```
-
-### Development Commands
-
-```bash
-# Run all checks (lint, format, type-check)
-make verify
-
-# Auto-fix lint and format issues
-make fix
-
-# Run tests
-make test
-
-# Run tests with coverage
-make test-cov
-
-# Run tests across all Python versions
-make test-matrix
-
-# Run tests with coverage across all versions
-make test-matrix-cov
-
-# Build documentation
-make docs
-
-# Serve documentation locally
-make docs-serve
-
-# Install pre-commit hooks
-pre-commit install
-```
-
-### CLI (if enabled)
-
-```bash
-# Show help
-my-project --help
-
-# Show version
-my-project --version
-
-# Run hello command
-my-project hello World
-```
-
-### Building and Publishing
-
-```bash
-# Build package
-uv build
-
-# Publish to PyPI (if configured)
-uv publish
-```
-
-## GitHub Actions Workflows
-
-- **CI** (`ci.yml`): Runs on every push/PR
-  - Linting with Ruff
-  - Type checking with ty
-  - Tests across Python matrix
-  - Coverage upload to Codecov
-
-- **Release** (`release.yml`): Triggers on version tags
-  - Builds distribution
-  - Publishes to PyPI
-  - Creates GitHub release with changelog
-
-- **Docs** (`docs.yml`): Deploys to GitHub Pages
-  > **Important:** If you enabled docs during setup, you must manually enable GitHub Pages in your repository. Go to **Settings → Pages → Source** and select **GitHub Actions**. Without this, the docs workflow will fail.
-
-## Updating Projects
+## Updating Existing Projects
 
 Copier supports updating projects to newer template versions:
 
@@ -180,17 +155,6 @@ Copier supports updating projects to newer template versions:
 cd my-project
 copier update --trust
 ```
-
-## Configuration
-
-All tool configurations are centralized in `pyproject.toml`:
-
-- Build system (hatchling)
-- Dependencies
-- Ruff (linting + formatting)
-- ty (type checking)
-- pytest
-- coverage
 
 ## License
 
