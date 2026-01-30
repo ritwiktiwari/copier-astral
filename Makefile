@@ -1,4 +1,4 @@
-.PHONY: verify fix lint format type-check install test
+.PHONY: verify fix lint format type-check install test docs docs-serve
 
 # Verify - check everything without making changes
 verify: lint format-check type-check
@@ -23,8 +23,15 @@ type-check:
 
 # Install dependencies
 install:
-	uv sync --group dev
+	uv sync --all-groups
 
 # Run tests
 test:
 	uv run pytest tests/ -v
+
+# Documentation
+docs:
+	uv run --group docs mkdocs build
+
+docs-serve:
+	uv run --group docs mkdocs serve

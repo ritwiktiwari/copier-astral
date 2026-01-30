@@ -1,10 +1,12 @@
-![Copier-Astral](docs/static/copier-astral.png)
+# Copier-Astral
 
----
+![Copier-Astral](static/copier-astral.png)
 
 My opinionated [Copier](https://copier.readthedocs.io/) template for bootstrapping Python projects. Batteries included: linting, testing, CI/CD, docs, and containerization — all pre-configured and ready to go.
 
 Built for my own workflow, but you're welcome to use it!
+
+## Tooling
 
 | Tool | Purpose | Benefit |
 |------|---------|---------|
@@ -38,12 +40,7 @@ Or from a local clone:
 copier copy --trust /path/to/copier-astral my-project
 ```
 
-> **Note:** The `--trust` flag is required because this template uses custom Jinja2 extensions for features like auto-detecting git user info and generating slugified package names. These extensions are safe to use but Copier warns about them by default.
+!!! note
+    The `--trust` flag is required because this template uses custom Jinja2 extensions for features like auto-detecting git user info and generating slugified package names. These extensions are safe to use but Copier warns about them by default.
 
-## Documentation
-
-For the full user guide, template options, and contributing instructions, see the [documentation site](https://YOUR_USERNAME.github.io/copier-astral/).
-
-## License
-
-This template is released under the MIT License.
+Once your project is generated, head over to the [User Guide](guide.md) for next steps.
