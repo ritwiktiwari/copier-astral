@@ -94,13 +94,13 @@ make verify
 # Auto-fix lint and format issues
 make fix
 ```
-{%- if include_precommit %}
+{%- if include_prek %}
 
-### Pre-commit
+### Prek
 
 ```bash
-pre-commit install
-pre-commit run --all-files
+prek install
+prek run --all-files
 ```
 {%- endif %}
 {%- if include_docs %}

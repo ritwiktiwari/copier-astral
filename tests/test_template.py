@@ -27,7 +27,7 @@ def default_answers() -> dict:
         "include_github_actions": True,
         "include_docker": True,
         "include_docs": True,
-        "include_precommit": True,
+        "include_prek": True,
         "include_codecov": True,
         "include_pypi_publish": True,
         "license": "MIT",
@@ -170,17 +170,17 @@ class TestOptionalFeatures:
 
         assert not file_exists(project, ".github")
 
-    def test_precommit_included(self, tmp_path: Path, default_answers: dict):
-        """Test pre-commit config is included when enabled."""
+    def test_prek_included(self, tmp_path: Path, default_answers: dict):
+        """Test prek config is included when enabled."""
         project = run_copier(tmp_path, default_answers)
 
-        precommit = project / ".pre-commit-config.yaml"
-        assert precommit.exists()
-        assert is_valid_yaml(precommit)
+        prek_config = project / ".pre-commit-config.yaml"
+        assert prek_config.exists()
+        assert is_valid_yaml(prek_config)
 
-    def test_precommit_excluded(self, tmp_path: Path, default_answers: dict):
-        """Test pre-commit config is excluded when disabled."""
-        answers = {**default_answers, "include_precommit": False}
+    def test_prek_excluded(self, tmp_path: Path, default_answers: dict):
+        """Test prek config is excluded when disabled."""
+        answers = {**default_answers, "include_prek": False}
         project = run_copier(tmp_path, answers)
 
         assert not file_exists(project, ".pre-commit-config.yaml")

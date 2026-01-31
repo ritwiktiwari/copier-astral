@@ -36,7 +36,7 @@ When you run `copier copy`, you'll be prompted for the following options.
 | `include_github_actions` | bool | `true` | Include GitHub Actions CI/CD |
 | `include_docker` | bool | `true` | Include Dockerfile for containerization |
 | `include_docs` | bool | `true` | Include MkDocs documentation |
-| `include_precommit` | bool | `true` | Include pre-commit hooks |
+| `include_prek` | bool | `true` | Include prek hooks |
 | `include_codecov` | bool | `true` | Include Codecov integration (requires GitHub Actions) |
 | `include_pypi_publish` | bool | `true` | Include automatic PyPI publishing (requires GitHub Actions) |
 

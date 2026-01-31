@@ -118,9 +118,9 @@ include_docs:
   help: "Include MkDocs documentation?"
   default: true
 
-include_precommit:
+include_prek:
   type: bool
-  help: "Include pre-commit hooks?"
+  help: "Include prek (pre-commit) hooks for code quality checks?"
   default: true
 
 include_codecov:
