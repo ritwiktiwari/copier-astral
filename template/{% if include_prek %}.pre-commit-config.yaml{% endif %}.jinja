@@ -1,5 +1,5 @@
-# Pre-commit hooks configuration
-# See https://pre-commit.com for more information
+# Prek hooks configuration
+# See https://prek.dev for more information
 
 repos:
   # General hooks
@@ -22,7 +22,7 @@ repos:
         args: [--fix]
       - id: ruff-format
 
-  # ty - Astral's type checker (local hook since no pre-commit repo yet)
+  # ty - Astral's type checker (local hook since no prek repo yet)
   - repo: local
     hooks:
       - id: ty

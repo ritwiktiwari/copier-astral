@@ -16,7 +16,7 @@ Built for my own workflow, but you're welcome to use it!
 | **[pytest](https://pytest.org/)** | Testing | Industry standard |
 | **[hatch](https://hatch.pypa.io/)** | Multi-version testing | Matrix testing with envs |
 | **[MkDocs](https://www.mkdocs.org/)** | Documentation | Material theme + mkdocstrings |
-| **[pre-commit](https://pre-commit.com/)** | Git hooks | Code quality enforcement |
+| **[prek](https://prek.dev/)** | Git hooks | Code quality enforcement |
 | **[Typer](https://typer.tiangolo.com/)** | CLI framework | Type-hint based, modern |
 | **[git-cliff](https://git-cliff.org/)** | Changelog | Auto-generated from conventional commits |
 

@@ -16,13 +16,13 @@ make install
 source .venv/bin/activate
 ```
 
-### 3. Run the pre-commit hooks
+### 3. Run the prek hooks
 
-If you enabled pre-commit, install the hooks and run them to resolve any initial formatting issues:
+If you enabled prek, install the hooks and run them to resolve any initial formatting issues:
 
 ```bash
-pre-commit install
-uv run pre-commit run -a
+prek install
+uv run prek run -a
 ```
 
 ### 4. Verify everything works
@@ -105,7 +105,7 @@ my-project/
 ├── pyproject.toml           # Single source of truth
 ├── mkdocs.yml               # If docs enabled
 ├── cliff.toml               # Changelog config
-├── .pre-commit-config.yaml  # If pre-commit enabled
+├── .pre-commit-config.yaml  # If prek enabled
 ├── Dockerfile               # If Docker enabled
 ├── .dockerignore            # If Docker enabled
 ├── README.md
