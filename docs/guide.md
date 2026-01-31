@@ -10,7 +10,13 @@ git init -b main
 make install
 ```
 
-### 2. Run the pre-commit hooks
+### 2. Activate the virtual environment
+
+```bash
+source .venv/bin/activate
+```
+
+### 3. Run the pre-commit hooks
 
 If you enabled pre-commit, install the hooks and run them to resolve any initial formatting issues:
 
@@ -19,26 +25,26 @@ pre-commit install
 uv run pre-commit run -a
 ```
 
-### 3. Verify everything works
+### 4. Verify everything works
 
 ```bash
 make verify
 make test
 ```
 
-### 4. Create your GitHub repository and push
+### 5. Create your GitHub repository and push
 
 ```bash
 git add .
 git commit -m "init: generate project from copier-astral"
-git remote add origin git@github.com:YOUR_USERNAME/my-project.git
+git remote add origin https://github.com/YOUR_USERNAME/my-project.git
 git push -u origin main
 ```
 
 !!! important
     If you enabled docs during setup, you must manually enable GitHub Pages in your repository. Go to **Settings → Pages → Source** and select **GitHub Actions**. Without this, the docs workflow will fail.
 
-### 5. Set up external services (optional)
+### 6. Set up external services (optional)
 
 - **Codecov**: Add your `CODECOV_TOKEN` as a [repository secret](https://docs.github.com/en/actions/security-for-github-actions/security-guides/using-secrets-in-github-actions#creating-secrets-for-a-repository)
 - **PyPI**: Add your `PYPI_TOKEN` as a repository secret. See the [PyPI docs](https://pypi.org/help/#apitoken) for creating a token
