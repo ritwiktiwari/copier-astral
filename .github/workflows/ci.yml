@@ -33,6 +33,8 @@ jobs:
           fetch-depth: 0
       - name: Run Gitleaks
         uses: gitleaks/gitleaks-action@v2.3.9
+        with:
+          args: detect --source . --no-banner --redact=80
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - uses: astral-sh/setup-uv@v5
@@ -44,10 +46,8 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: semgrep/semgrep
-
     # Skip any PRs created by dependabot or renovate to avoid permission issues:
     if: ${{ github.actor != 'dependabot[bot]' && github.actor != 'dependabot-preview[bot]' && github.actor != 'Renovate[bot]' }}
-
     steps:
       - uses: actions/checkout@v4
       - run: semgrep scan
