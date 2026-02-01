@@ -41,5 +41,5 @@ secrets:
 	gitleaks detect --redact 80
 
 # Dependency audit
-pip-audit:
-	pip-audit --fix
+pysentry:
+	uv run pysentry-rs

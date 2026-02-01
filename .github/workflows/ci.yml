@@ -39,20 +39,16 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - uses: astral-sh/setup-uv@v5
       - run: make install
-      - uses: pypa/gh-action-pip-audit@v1.1.0
-        with:
-          virtual-environment: .venv
-          local: true
+      - run: make pysentry
 
   sast_with_semgrep:
     name: semgrep scan
     runs-on: ubuntu-latest
-
     container:
       image: semgrep/semgrep
 
-    # Skip any PR created by dependabot to avoid permission issues:
-    if: (github.actor != 'dependabot[bot]')
+    # Skip any PRs created by dependabot or renovate to avoid permission issues:
+    if: ${{ github.actor != 'dependabot[bot]' && github.actor != 'dependabot-preview[bot]' && github.actor != 'Renovate[bot]' }}
 
     steps:
       - uses: actions/checkout@v4
