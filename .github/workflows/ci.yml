@@ -22,3 +22,37 @@ jobs:
       - uses: astral-sh/setup-uv@v5
       - run: make install
       - run: make test
+
+  secrets_and_dependency_scan:
+    name: Secret and Dependency Scan
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Run Gitleaks
+        uses: gitleaks/gitleaks-action@v2.3.9
+        with:
+          args: detect --source . --no-banner --redact=80
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - run: make install
+      - uses: pypa/gh-action-pip-audit@v1.1.0
+        with:
+          virtual-environment: .venv
+          local: true
+
+  sast_with_semgrep:
+    name: semgrep scan
+    runs-on: ubuntu-latest
+
+    container:
+      image: semgrep/semgrep
+
+    # Skip any PR created by dependabot to avoid permission issues:
+    if: (github.actor != 'dependabot[bot]')
+
+    steps:
+      - uses: actions/checkout@v4
+      - run: semgrep scan
