@@ -37,6 +37,7 @@ jobs:
           args: detect --source . --no-banner --redact=80
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - uses: astral-sh/setup-uv@v5
       - run: make install
       - uses: pypa/gh-action-pip-audit@v1.1.0
         with:

@@ -35,3 +35,11 @@ docs:
 
 docs-serve:
 	uv run --group docs mkdocs serve
+
+# Secret scanning
+secrets:
+	gitleaks detect --redact 80
+
+# Dependency audit
+pip-audit:
+	pip-audit --fix
