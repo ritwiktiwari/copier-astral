@@ -17,6 +17,9 @@ Built for my own workflow, but you're welcome to use it!
 | **[prek](https://prek.j178.dev/)** | Git hooks | Code quality enforcement |
 | **[Typer](https://typer.tiangolo.com/)** | CLI framework | Type-hint based, modern |
 | **[git-cliff](https://git-cliff.org/)** | Changelog | Auto-generated from conventional commits |
+| **[gitleaks](https://github.com/gitleaks/gitleaks)**| search repo for secrets | alert on leaked secrets |
+| **[pysentry-rs](https://pysentry.com/)** | Vulnerability Scanner | Highlight dependencies _potential_ security issues |
+| **[semgrep](https://semgrep.dev/)** | Static Application Security Testing | SAST scans highlight potential [security issues](https://semgrep.dev/docs/languages/python) in repo code |
 
 ## Quick Start
 
