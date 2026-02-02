@@ -50,6 +50,9 @@ dev = [
 {%- if include_prek %}
     "prek>=0.1.0",
 {%- endif %}
+{%- if include_security_scanning %}
+    "pysentry-rs>=0.1.0",
+{%- endif %}
 ]
 {%- if include_docs %}
 docs = [

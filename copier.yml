@@ -129,6 +129,12 @@ include_codecov:
   default: true
   when: "{{ include_github_actions }}"
 
+include_security_scanning:
+  type: bool
+  help: "Include security scanning (Gitleaks, pysentry, Semgrep)?"
+  default: true
+  when: "{{ include_github_actions }}"
+
 include_pypi_publish:
   type: bool
   help: "Include automatic PyPI publishing?"

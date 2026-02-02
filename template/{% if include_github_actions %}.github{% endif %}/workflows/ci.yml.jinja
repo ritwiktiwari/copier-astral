@@ -88,3 +88,35 @@ jobs:
           files: ./coverage.xml
           fail_ci_if_error: false
 {%- endif %}
+
+{%- if include_security_scanning %}
+
+  secrets_and_dependency_scan:
+    name: Secret and Dependency Scan
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Run Gitleaks
+        uses: gitleaks/gitleaks-action@v2.3.9
+        env:
+          GITHUB_TOKEN: {% raw %}${{ secrets.GITHUB_TOKEN }}{% endraw %}
+      - uses: astral-sh/setup-uv@v5
+      - run: make install
+      - run: make pysentry
+
+  sast_with_semgrep:
+    name: semgrep scan
+    runs-on: ubuntu-latest
+    container:
+      image: semgrep/semgrep
+
+    # Skip any PRs created by dependabot or renovate to avoid permission issues:
+    if: {% raw %}${{ github.actor != 'dependabot[bot]' && github.actor != 'dependabot-preview[bot]' && github.actor != 'Renovate[bot]' }}{% endraw %}
+
+    steps:
+      - uses: actions/checkout@v4
+      - run: semgrep scan
+{%- endif %}

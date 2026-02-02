@@ -49,6 +49,16 @@ git push -u origin main
 - **Codecov**: Add your `CODECOV_TOKEN` as a [repository secret](https://docs.github.com/en/actions/security-for-github-actions/security-guides/using-secrets-in-github-actions#creating-secrets-for-a-repository)
 - **PyPI**: Add your `PYPI_TOKEN` as a repository secret. See the [PyPI docs](https://pypi.org/help/#apitoken) for creating a token
 
+### Security Scanning
+
+If you enabled security scanning, the CI pipeline includes:
+
+- **Gitleaks** — scans your git history for hardcoded secrets and credentials
+- **pysentry-rs** — scans Python dependencies for known vulnerabilities (`make pysentry`)
+- **Semgrep** — static application security testing (SAST) for common code vulnerabilities
+
+These run automatically on every push and pull request. The Semgrep job skips PRs created by Dependabot or Renovate to avoid permission issues.
+
 ## Development Commands
 
 All commands are available via `make`:
@@ -62,6 +72,7 @@ All commands are available via `make`:
 | `make test-cov` | Run tests with coverage |
 | `make test-matrix` | Run tests across all Python versions |
 | `make test-matrix-cov` | Run tests with coverage across all versions |
+| `make pysentry` | Run dependency vulnerability scanning |
 | `make docs` | Build documentation |
 | `make docs-serve` | Serve documentation locally |
 
