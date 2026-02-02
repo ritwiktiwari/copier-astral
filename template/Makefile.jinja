@@ -1,4 +1,4 @@
-.PHONY: verify fix lint format format-check type-check install test test-cov test-matrix test-matrix-cov{% if include_docs %} docs docs-serve{% endif %}
+.PHONY: verify fix lint format format-check type-check install test test-cov test-matrix test-matrix-cov{% if include_security_scanning %} pysentry{% endif %}{% if include_docs %} docs docs-serve{% endif %}
 
 # Verify - check everything without making changes
 verify: lint format-check type-check
@@ -41,6 +41,11 @@ test-matrix:
 test-matrix-cov:
 	uv run hatch test --cover
 
+{% if include_security_scanning %}
+# Dependency vulnerability scanning
+pysentry:
+	uv run pysentry-rs
+{% endif %}
 {% if include_docs %}
 # Documentation
 docs:
