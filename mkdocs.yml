@@ -1,6 +1,6 @@
 site_name: Copier-Astral
 site_description: An opinionated Copier template for Python projects using Astral's toolchain
-repo_url: https://github.com/ritwik/copier-astral
+repo_url: https://github.com/ritwiktiwari/copier-astral
 repo_name: ritwik/copier-astral
 edit_uri: edit/main/docs/
 
