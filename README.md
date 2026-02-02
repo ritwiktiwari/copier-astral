@@ -26,8 +26,34 @@ Built for my own workflow, but you're welcome to use it!
 ### Prerequisites
 
 - Python 3.10+
-- [Copier](https://copier.readthedocs.io/) (`pip install copier`)
-- [copier-template-extensions](https://github.com/copier-org/copier-template-extensions) (`pip install copier-template-extensions`)
+- [uv](https://docs.astral.sh/uv/getting-started/installation/) (recommended), [pipx](https://pipx.pypa.io/), or pip
+- [Copier](https://copier.readthedocs.io/) and [copier-template-extensions](https://github.com/copier-org/copier-template-extensions)
+
+**Install uv:**
+
+```bash
+curl -LsSf https://astral.sh/uv/install.sh | sh
+```
+
+**Install copier with uv (recommended):**
+
+```bash
+uv tool install copier
+uv tool inject copier copier-template-extensions
+```
+
+**With pipx:**
+
+```bash
+pipx install copier
+pipx inject copier copier-template-extensions
+```
+
+**With pip:**
+
+```bash
+pip install copier copier-template-extensions
+```
 
 ### Generate a Project
 
