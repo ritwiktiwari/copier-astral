@@ -76,7 +76,7 @@ jobs:
           args: --verbose
         env:
           OUTPUT: RELEASE_NOTES.md
-          GITHUB_REPO: ${{ github.repository }}
+          GITHUB_REPO: {% raw %}${{ github.repository }}{% endraw %}
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
