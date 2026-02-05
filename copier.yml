@@ -58,12 +58,12 @@ author_email:
 
 github_username:
   type: str
-  help: "GitHub username or organization"
+  help: "GitHub username or organization (used for repository URLs)"
   default: "{{ '' | github_username }}"
   placeholder: "johndoe"
   validator: >-
-    {% if not github_username %}
-    GitHub username is required for generating repository URLs.
+    {% if github_username and not github_username | regex_search('^[a-zA-Z0-9]([a-zA-Z0-9-]*[a-zA-Z0-9])?$') %}
+    Invalid GitHub username format.
     {% endif %}
 
 # =============================================================================

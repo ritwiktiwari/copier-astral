@@ -51,7 +51,11 @@ def git_config(key: str) -> str:
 
 
 def github_username(_: str = "") -> str:
-    """Get the GitHub username from gh CLI.
+    """Get the GitHub username from gh CLI or git config.
+
+    Tries the following sources in order:
+    1. GitHub CLI (gh api user)
+    2. git config github.user
 
     Args:
         _: Ignored input (allows use as filter).
@@ -59,6 +63,7 @@ def github_username(_: str = "") -> str:
     Returns:
         The GitHub username or empty string if not found.
     """
+    # Try gh CLI first
     try:
         result = subprocess.run(
             ["gh", "api", "user", "--jq", ".login"],
@@ -66,10 +71,24 @@ def github_username(_: str = "") -> str:
             text=True,
             timeout=10,
         )
-        if result.returncode == 0:
+        if result.returncode == 0 and result.stdout.strip():
             return result.stdout.strip()
     except (subprocess.SubprocessError, FileNotFoundError):
         pass
+
+    # Fall back to git config github.user
+    try:
+        result = subprocess.run(
+            ["git", "config", "github.user"],
+            capture_output=True,
+            text=True,
+            timeout=5,
+        )
+        if result.returncode == 0 and result.stdout.strip():
+            return result.stdout.strip()
+    except (subprocess.SubprocessError, FileNotFoundError):
+        pass
+
     return ""
 
 
