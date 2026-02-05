@@ -56,6 +56,7 @@ def run_copier(tmp_path: Path, answers: dict) -> Path:
         "--defaults",
         "--force",
         "--trust",
+        "--vcs-ref=main"
     ]
 
     for key, value in answers.items():
@@ -289,3 +290,17 @@ class TestGitHubURLs:
         assert file_contains_text(
             docs_index, "https://github.com/testuser/test-project"
         )
+
+    def test_empty_github_username_does_not_crash(
+        self, tmp_path: Path, default_answers: dict
+    ):
+        """Test that an empty github_username doesn't crash copier.
+
+        Regression test for: https://github.com/ritwiktiwari/copier-astral/issues/25
+        When gh CLI is not installed and git config github.user is unset,
+        the default is empty. Copier validates defaults before prompting,
+        so the validator must not reject empty values.
+        """
+        answers = {**default_answers, "github_username": ""}
+        project = run_copier(tmp_path, answers)
+        assert project.exists()
