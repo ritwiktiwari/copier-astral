@@ -125,9 +125,7 @@ class TestGitHubUsername:
         git_result = subprocess.CompletedProcess(
             args=[], returncode=0, stdout="gituser\n", stderr=""
         )
-        with patch(
-            "extensions.subprocess.run", side_effect=[gh_result, git_result]
-        ):
+        with patch("extensions.subprocess.run", side_effect=[gh_result, git_result]):
             assert github_username() == "gituser"
 
     def test_returns_empty_when_both_fail(self):
@@ -151,9 +149,7 @@ class TestGitHubUsername:
 
     def test_both_not_installed(self):
         """Test that empty string is returned when neither tool is installed."""
-        with patch(
-            "extensions.subprocess.run", side_effect=FileNotFoundError()
-        ):
+        with patch("extensions.subprocess.run", side_effect=FileNotFoundError()):
             assert github_username() == ""
 
     def test_ignores_input_parameter(self):
@@ -172,9 +168,7 @@ class TestGitHubUsername:
         git_result = subprocess.CompletedProcess(
             args=[], returncode=0, stdout="gituser\n", stderr=""
         )
-        with patch(
-            "extensions.subprocess.run", side_effect=[gh_result, git_result]
-        ):
+        with patch("extensions.subprocess.run", side_effect=[gh_result, git_result]):
             assert github_username() == "gituser"
 
 
