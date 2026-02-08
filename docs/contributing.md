@@ -5,7 +5,7 @@
 Clone the repository and install dependencies:
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/copier-astral.git
+git clone https://github.com/ritwiktiwari/copier-astral.git
 cd copier-astral
 make install
 ```
