@@ -23,6 +23,7 @@ repos:
       - id: ruff-format
 
   # ty - Astral's type checker (local hook since no prek repo yet)
+  # Gitleaks - a tool for detecting secrets like passwords, API keys, and tokens
   - repo: local
     hooks:
       - id: ty
@@ -30,4 +31,9 @@ repos:
         entry: uv run ty check
         language: system
         types: [python]
+        pass_filenames: false
+      - id: gitleaks
+        name: gitleaks secret scan
+        entry: gitleaks git --redact=80 --no-banner --timeout 2 -v --max-target-megabytes=2 --pre-commit --staged
+        language: system
         pass_filenames: false

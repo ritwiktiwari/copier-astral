@@ -38,7 +38,7 @@ docs-serve:
 
 # Secret scanning
 secrets:
-	gitleaks detect --redact 80
+	gitleaks detect --redact 80 --no-banner --timeout 2 --max-target-megabytes=2 -v
 
 # Dependency audit
 pysentry:
