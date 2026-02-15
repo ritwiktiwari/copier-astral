@@ -43,3 +43,6 @@ secrets:
 # Dependency audit
 pysentry:
 	uv run pysentry-rs
+
+secrets:
+	gitleaks git --redact=80 --no-banner --timeout 2 --max-target-megabytes=2 -v
