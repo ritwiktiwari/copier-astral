@@ -56,7 +56,7 @@ def run_copier(tmp_path: Path, answers: dict) -> Path:
         "--defaults",
         "--force",
         "--trust",
-        "--vcs-ref=main",
+        "--vcs-ref=HEAD",
     ]
 
     for key, value in answers.items():
