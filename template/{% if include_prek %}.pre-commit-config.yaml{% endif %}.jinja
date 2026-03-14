@@ -34,6 +34,6 @@ repos:
         pass_filenames: false
       - id: gitleaks
         name: gitleaks secret scan
-        entry: gitleaks git --redact=80 --no-banner --timeout 2 -v --max-target-megabytes=2 --pre-commit --staged
+        entry: gitleaks git protect --redact=80 --no-banner --timeout 60s -v --max-target-megabytes=2 --pre-commit --staged
         language: system
         pass_filenames: false
