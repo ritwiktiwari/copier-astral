@@ -1,4 +1,4 @@
-.PHONY: verify fix lint format type-check install test docs docs-serve
+.PHONY: verify fix lint format type-check install test docs docs-serve secrets pysentry
 
 # Verify - check everything without making changes
 verify: lint format-check type-check

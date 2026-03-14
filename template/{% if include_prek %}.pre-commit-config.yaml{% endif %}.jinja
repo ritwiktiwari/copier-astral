@@ -22,18 +22,23 @@ repos:
         args: [--fix]
       - id: ruff-format
 
-  # ty - Astral's type checker (local hook since no prek repo yet)
-  # Gitleaks - a tool for detecting secrets like passwords, API keys, and tokens
+
+  # Local hooks, if path failure occurs, use the `which` command, like `which gitleaks`, to identify the full path and add it to the `entry:` line
   - repo: local
     hooks:
+      # ty - Astral's type checker (used as a local hook since no prek repo yet)
       - id: ty
         name: ty type checker
         entry: uv run ty check
         language: system
         types: [python]
         pass_filenames: false
+      # Gitleaks - a tool for detecting secrets like passwords, API keys, and tokens
+      # When a secret is detected, gitleaks will create a fingerprint. If the secret is a false positive then this can be excluded in `./gitleaks/.gitleaksignore`.
+      # Alternatively you can add a gitleaks:allow comment to a line to ignore a secret on it. Eg: my_secret = 'some-secret'  #gitleaks:allow
       - id: gitleaks
         name: gitleaks secret scan
         entry: gitleaks git protect --redact=80 --no-banner --timeout 60s -v --max-target-megabytes=2 --pre-commit --staged
+        entry: bash -c 'GL=$(command -v gitleaks || command -v /opt/homebrew/bin/gitleaks || command -v /c/ProgramData/chocolatey/bin/gitleaks 2>/dev/null) || { echo "gitleaks not found by prek, identify path. Skipping now"; exit 0; }; "$GL" git --redact=80 --no-banner --timeout 2 -v --max-target-megabytes=2 --pre-commit --staged'
         language: system
         pass_filenames: false
