@@ -2,6 +2,7 @@
 
 # Verify - check everything without making changes
 verify: lint format-check type-check
+all: verify
 
 # Fix - automatically fix what can be fixed
 fix:
