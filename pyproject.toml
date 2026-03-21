@@ -14,7 +14,6 @@ dependencies = []
 dev = [
     "copier>=9.11.3",
     "copier-template-extensions>=0.3.3",
-    "pip-audit>=2.10.0",
     "pysentry-rs>=0.4.0",
     "pytest>=9.0.2",
     "ruff>=0.14.14",
