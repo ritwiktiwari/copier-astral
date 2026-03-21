@@ -33,13 +33,6 @@ jobs:
           fetch-depth: 0
       - name: Run Gitleaks
         uses: gitleaks/gitleaks-action@v2.3.9
-<<<<<<< HEAD
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - uses: astral-sh/setup-uv@v5
-      - run: make install
-      - run: make pysentry
-=======
         with:
           args: detect --source . --no-banner --redact=80
         env:
@@ -51,16 +44,6 @@ jobs:
   sast_with_semgrep:
     name: semgrep scan
     runs-on: ubuntu-latest
-<<<<<<< HEAD
-    container:
-      image: semgrep/semgrep
-    # Skip any PRs created by dependabot or renovate to avoid permission issues:
-    if: ${{ github.actor != 'dependabot[bot]' && github.actor != 'dependabot-preview[bot]' && github.actor != 'Renovate[bot]' }}
-    steps:
-      - uses: actions/checkout@v4
-      - run: semgrep scan
-=======
-
     container:
       image: semgrep/semgrep
 
@@ -70,4 +53,3 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: semgrep scan
->>>>>>> 9d01bc7 (feat: added sast semgrep, dependency scanning with pip-audit and secrets detection with gitleaks)
