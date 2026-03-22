@@ -48,7 +48,7 @@ git push -u origin main
 
 - **Codecov**: Add your `CODECOV_TOKEN` as a [repository secret](https://docs.github.com/en/actions/security-for-github-actions/security-guides/using-secrets-in-github-actions#creating-secrets-for-a-repository)
 - **PyPI**: Add your `PYPI_TOKEN` as a repository secret. See the [PyPI docs](https://pypi.org/help/#apitoken) for creating a token
-- **Renovate**: Install the [Renovate GitHub App](https://github.com/apps/renovate) and grant it access to your repository. Renovate will open pull requests automatically when new dependency versions are available
+- **Renovate**: Install the [Renovate GitHub App](https://github.com/apps/renovate) and grant it access to your repository. Renovate will open pull requests automatically when new versions of GitHub Actions or Python dependencies (via `pyproject.toml`) are available
 
 ### Setting Up Renovate
 

@@ -3,5 +3,5 @@
   "extends": [
     "config:recommended"
   ],
-  "enabledManagers": ["github-actions", "pep621", "uv"]
+  "enabledManagers": ["github-actions", "pep621"]
 }
