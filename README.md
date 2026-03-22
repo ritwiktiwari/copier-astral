@@ -20,6 +20,7 @@ Built for my own workflow, but you're welcome to use it!
 | **[gitleaks](https://github.com/gitleaks/gitleaks)**| Search repo for secrets | Alert on leaked secrets |
 | **[pysentry-rs](https://pysentry.com/)** | Vulnerability Scanner | Highlight _potential_ dependency security issues |
 | **[semgrep](https://semgrep.dev/)** | Static Application Security Testing | SAST scans highlight potential [security issues](https://semgrep.dev/docs/languages/python) in repo code |
+| **[Renovate](https://renovateapp.com/)** | Dependency updates | Automated PRs to keep dependencies up to date |
 
 ## Quick Start
 
