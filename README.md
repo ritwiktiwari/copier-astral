@@ -6,6 +6,8 @@ My opinionated [Copier](https://copier.readthedocs.io/) template for bootstrappi
 
 Built for my own workflow, but you're welcome to use it!
 
+![Demo](docs/static/demo.gif)
+
 | Tool | Purpose | Benefit |
 |------|---------|---------|
 | **[uv](https://docs.astral.sh/uv/)** | Package management, venv, dependencies | 10-100x faster than pip |
