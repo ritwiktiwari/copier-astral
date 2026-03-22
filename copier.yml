@@ -141,6 +141,11 @@ include_pypi_publish:
   default: true
   when: "{{ include_github_actions }}"
 
+include_renovate:
+  type: bool
+  help: "Include Renovate configuration for automated dependency updates?"
+  default: true
+
 # =============================================================================
 # License
 # =============================================================================

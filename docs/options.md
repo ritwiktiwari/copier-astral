@@ -40,6 +40,7 @@ When you run `copier copy`, you'll be prompted for the following options.
 | `include_codecov` | bool | `true` | Include Codecov integration (requires GitHub Actions) |
 | `include_security_scanning` | bool | `true` | Include security scanning with Gitleaks, pysentry, and Semgrep (requires GitHub Actions) |
 | `include_pypi_publish` | bool | `true` | Include automatic PyPI publishing (requires GitHub Actions) |
+| `include_renovate` | bool | `true` | Include Renovate configuration for automated dependency updates |
 
 ### License
 
