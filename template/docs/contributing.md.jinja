@@ -89,7 +89,13 @@ To activate it:
 5. Renovate will open an onboarding pull request titled `Configure Renovate` — merge it to activate
 6. Renovate will now open PRs automatically when new dependency versions are available
 
-The `renovate.json` at the root of this project is pre-configured to manage GitHub Actions, `pyproject.toml` dependencies, and the `uv.lock` lockfile.
+The `renovate.json` at the root of this project is pre-configured to manage:
+{%- if include_github_actions %}
+
+- GitHub Actions workflow dependencies
+{%- endif %}
+- Python dependencies (via `pyproject.toml`)
+- `uv.lock` lockfile
 
 {%- endif %}
 ## Code Style

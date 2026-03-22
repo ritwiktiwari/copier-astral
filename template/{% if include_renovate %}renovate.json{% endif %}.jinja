@@ -3,5 +3,9 @@
   "extends": [
     "config:recommended"
   ],
-  "enabledManagers": ["github-actions", "pep621", "uv"]
+  "enabledManagers": [
+    {%- if include_github_actions %}"github-actions", {% endif -%}
+    "pep621",
+    "uv"
+  ]
 }
