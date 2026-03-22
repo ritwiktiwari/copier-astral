@@ -48,6 +48,19 @@ git push -u origin main
 
 - **Codecov**: Add your `CODECOV_TOKEN` as a [repository secret](https://docs.github.com/en/actions/security-for-github-actions/security-guides/using-secrets-in-github-actions#creating-secrets-for-a-repository)
 - **PyPI**: Add your `PYPI_TOKEN` as a repository secret. See the [PyPI docs](https://pypi.org/help/#apitoken) for creating a token
+- **Renovate**: Install the [Renovate GitHub App](https://github.com/apps/renovate) and grant it access to your repository. Renovate will open pull requests automatically when new dependency versions are available
+
+### Setting Up Renovate
+
+1. Go to [github.com/apps/renovate](https://github.com/apps/renovate) and click **Install**
+2. Choose your GitHub account or organization
+3. Under **Repository access**, select **Only select repositories** and pick your repository (or choose **All repositories** if you prefer)
+4. Click **Install & Authorize**
+5. Renovate will open an onboarding pull request titled `Configure Renovate` — review it and merge it to activate
+6. From that point on, Renovate will automatically open PRs when new versions of your dependencies are available
+
+!!! tip
+    The `renovate.json` in your project is pre-configured to manage GitHub Actions, `pyproject.toml` dependencies, and the `uv.lock` lockfile. No further configuration is needed.
 
 ### Security Scanning
 
@@ -119,6 +132,7 @@ my-project/
 ├── .pre-commit-config.yaml  # If prek enabled
 ├── Dockerfile               # If Docker enabled
 ├── .dockerignore            # If Docker enabled
+├── renovate.json            # If Renovate enabled
 ├── README.md
 ├── CHANGELOG.md
 ├── LICENSE

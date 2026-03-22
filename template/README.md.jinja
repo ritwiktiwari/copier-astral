@@ -12,6 +12,9 @@
 [![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
 [![ty](https://img.shields.io/badge/type--checked-ty-blue?labelColor=orange)](https://github.com/astral-sh/ty)
 [![License: {{ license }}](https://img.shields.io/badge/License-{{ license | replace('-', '--') }}-yellow.svg)](https://github.com/{{ github_username }}/{{ repository_name }}/blob/main/LICENSE)
+{%- if include_renovate %}
+[![Renovate](https://img.shields.io/badge/renovate-enabled-brightgreen.svg?logo=renovate)](https://renovateapp.com/)
+{%- endif %}
 
 {{ project_description }}
 
@@ -110,6 +113,14 @@ prek run --all-files
 ```bash
 make docs-serve
 ```
+{%- endif %}
+
+{%- if include_renovate %}
+## Dependency Updates
+
+This project uses [Renovate](https://renovateapp.com/) to keep dependencies up to date automatically. Renovate will open pull requests when new versions of dependencies are available.
+
+To enable it, install the [Renovate GitHub App](https://github.com/apps/renovate) and grant it access to this repository.
 {%- endif %}
 
 ## License

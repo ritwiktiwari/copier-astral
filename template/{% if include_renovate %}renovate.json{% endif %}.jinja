@@ -1,0 +1,11 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended"
+  ],
+  "enabledManagers": [
+    {%- if include_github_actions %}"github-actions", {% endif -%}
+    "pep621",
+    "uv"
+  ]
+}
