@@ -21,7 +21,7 @@ COPY README.md ./
 
 # Install the project
 RUN --mount=type=cache,target=/root/.cache/uv \
-    uv sync --frozen --no-dev
+    uv sync --frozen --no-dev --no-editable
 
 
 # Stage 2: Runtime

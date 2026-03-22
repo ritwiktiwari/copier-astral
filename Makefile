@@ -5,21 +5,21 @@ verify: lint format-check type-check
 
 # Fix - automatically fix what can be fixed
 fix:
-	uvx ruff check --fix .
-	uvx ruff format .
+	uv run ruff check --fix .
+	uv run ruff format .
 
 # Individual targets
 lint:
-	uvx ruff check .
+	uv run ruff check .
 
 format-check:
-	uvx ruff format --check .
+	uv run ruff format --check .
 
 format:
-	uvx ruff format .
+	uv run ruff format .
 
 type-check:
-	uvx ty check
+	uv run ty check
 
 # Install dependencies
 install:

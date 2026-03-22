@@ -142,4 +142,6 @@ class CurrentYearExtension(Extension):
         """
         super().__init__(environment)
         environment.filters["current_year"] = current_year
+        # ty's Jinja2 stubs incorrectly narrow globals; newer ty versions
+        # may raise invalid-assignment here
         environment.globals["current_year"] = datetime.now().year
