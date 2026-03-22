@@ -4,7 +4,6 @@ import re
 import subprocess
 import unicodedata
 from datetime import datetime
-from typing import Any, cast
 
 from jinja2 import Environment
 from jinja2.ext import Extension
@@ -143,4 +142,6 @@ class CurrentYearExtension(Extension):
         """
         super().__init__(environment)
         environment.filters["current_year"] = current_year
-        environment.globals["current_year"] = cast(Any, current_year())
+        # ty's Jinja2 stubs incorrectly narrow globals; newer ty versions
+        # may raise invalid-assignment here
+        environment.globals["current_year"] = datetime.now().year
