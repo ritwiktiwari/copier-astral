@@ -222,7 +222,7 @@ dev = [
     { name = "pysentry-rs", specifier = ">=0.4.3" },
     { name = "pytest", specifier = ">=9.0.2" },
     { name = "ruff", specifier = ">=0.15.7" },
-    { name = "ty", specifier = ">=0.0.24" },
+    { name = "ty", specifier = ">=0.0.14" },
 ]
 docs = [
     { name = "mkdocs", specifier = ">=1.6.0" },
